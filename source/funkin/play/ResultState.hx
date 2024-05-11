@@ -46,15 +46,12 @@ class ResultState extends MusicBeatSubState
 
   override function create():Void
   {
-    /*
       if (params.scoreData.sick == params.scoreData.totalNotesHit
         && params.scoreData.maxCombo == params.scoreData.totalNotesHit) resultsVariation = PERFECT;
       else if (params.scoreData.missed + params.scoreData.bad + params.scoreData.shit >= params.scoreData.totalNotes * 0.50)
         resultsVariation = SHIT; // if more than half of your song was missed, bad, or shit notes, you get shit ending!
       else
         resultsVariation = NORMAL;
-     */
-    resultsVariation = NORMAL;
 
     FunkinSound.playMusic('results$resultsVariation',
       {

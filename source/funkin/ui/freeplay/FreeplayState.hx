@@ -195,11 +195,20 @@ class FreeplayState extends MusicBeatSubState
       {
         var song:Song = SongRegistry.instance.fetchEntry(songId);
 
-        // Only display songs which actually have available charts for the current character.
-        var availableDifficultiesForSong:Array<String> = song.listDifficulties(displayedVariations, false);
+        // Only display songs which actually have available charts for the current character.;
+        //trace(variations);
+        var variations = [Constants.DEFAULT_VARIATION];
+        if (song.variations.contains(currentCharacter)) variations = [currentCharacter];
+        else
+        {
+          for (variation in song.variations)
+            if (!variations.contains(variation)) variations.push(variation);
+        }
+
+        var availableDifficultiesForSong:Array<String> = song.listDifficulties(variations, false);
         if (availableDifficultiesForSong.length == 0) continue;
 
-        songs.push(new FreeplaySongData(levelId, songId, song, displayedVariations));
+        songs.push(new FreeplaySongData(levelId, songId, song, variations));
         for (difficulty in availableDifficultiesForSong)
         {
           diffIdsTotal.pushUnique(difficulty);
@@ -257,6 +266,8 @@ class FreeplayState extends MusicBeatSubState
         x: FlxG.width * 2,
         speed: 0.4,
       });
+
+    // local var charName:String = currentCharacter;
 
     var funnyScroll:BGScrollingText = new BGScrollingText(0, 220, 'BOYFRIEND', FlxG.width / 2, false, 60);
     funnyScroll.funnyColor = 0xFFFF9963;
@@ -322,6 +333,7 @@ class FreeplayState extends MusicBeatSubState
 
     // TODO: Replace this.
     if (currentCharacter == 'pico') dj.visible = false;
+    if (currentCharacter == 'tankman') dj.visible = false;
 
     add(dj);
 

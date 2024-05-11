@@ -2,6 +2,7 @@
 .haxelib/
 .vs/
 APIStuff.hx
+batfiles/
 dump/
 export/
 RECOVER_*.fla
