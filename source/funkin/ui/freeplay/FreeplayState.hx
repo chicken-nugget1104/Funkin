@@ -267,9 +267,11 @@ class FreeplayState extends MusicBeatSubState
         speed: 0.4,
       });
 
-    // local var charName:String = currentCharacter;
+    var charName:String = currentCharacter;
 
-    var funnyScroll:BGScrollingText = new BGScrollingText(0, 220, 'BOYFRIEND', FlxG.width / 2, false, 60);
+    var textToShow:String = (charName.toLowerCase() == "bf") ? "BOYFRIEND" : currentCharacter;
+
+    var funnyScroll:BGScrollingText = new BGScrollingText(0, 220, textToShow, FlxG.width / 2, false, 60);
     funnyScroll.funnyColor = 0xFFFF9963;
     funnyScroll.speed = -3.8;
     grpTxtScrolls.add(funnyScroll);
@@ -291,7 +293,9 @@ class FreeplayState extends MusicBeatSubState
         speed: 0.4,
       });
 
-    var funnyScroll2:BGScrollingText = new BGScrollingText(0, 335, 'BOYFRIEND', FlxG.width / 2, false, 60);
+    var textToShow2:String = (charName.toLowerCase() == "bf") ? "BOYFRIEND" : currentCharacter;
+
+    var funnyScroll2:BGScrollingText = new BGScrollingText(0, 335, textToShow2, FlxG.width / 2, false, 60);
     funnyScroll2.funnyColor = 0xFFFF9963;
     funnyScroll2.speed = -3.8;
     grpTxtScrolls.add(funnyScroll2);
@@ -313,7 +317,9 @@ class FreeplayState extends MusicBeatSubState
         speed: 0.4
       });
 
-    var funnyScroll3:BGScrollingText = new BGScrollingText(0, orangeBackShit.y + 10, 'BOYFRIEND', FlxG.width / 2, 60);
+    var textToShow3:String = (charName.toLowerCase() == "bf") ? "BOYFRIEND" : currentCharacter;
+
+    var funnyScroll3:BGScrollingText = new BGScrollingText(0, orangeBackShit.y + 10, textToShow3, FlxG.width / 2, 60);
     funnyScroll3.funnyColor = 0xFFFEA400;
     funnyScroll3.speed = -3.8;
     grpTxtScrolls.add(funnyScroll3);
@@ -714,6 +720,11 @@ class FreeplayState extends MusicBeatSubState
   {
     super.update(elapsed);
 
+    var charName:String = currentCharacter;
+    var textToShow:String = (charName.toLowerCase() == "bf") ? "BOYFRIEND" : currentCharacter;
+    var textToShow2:String = (charName.toLowerCase() == "bf") ? "BOYFRIEND" : currentCharacter;
+    var textToShow3:String = (charName.toLowerCase() == "bf") ? "BOYFRIEND" : currentCharacter;
+
     if (FlxG.keys.justPressed.F)
     {
       var targetSong = grpCapsules.members[curSelected]?.songData;
@@ -745,8 +756,8 @@ class FreeplayState extends MusicBeatSubState
       }
     }
 
-    lerpScore = MathUtil.coolLerp(lerpScore, intendedScore, 0.2);
-    lerpCompletion = MathUtil.coolLerp(lerpCompletion, intendedCompletion, 0.9);
+    lerpScore = MathUtil.smoothLerp(lerpScore, intendedScore, elapsed, 0.5);
+    lerpCompletion = MathUtil.smoothLerp(lerpCompletion, intendedCompletion, elapsed, 0.5);
 
     if (Math.isNaN(lerpScore))
     {
@@ -922,6 +933,7 @@ class FreeplayState extends MusicBeatSubState
 
     if (controls.BACK)
     {
+      busy = true;
       FlxTween.globalManager.clear();
       FlxTimer.globalManager.clear();
       dj.onIntroDone.removeAll();

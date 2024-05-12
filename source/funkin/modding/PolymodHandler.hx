@@ -73,8 +73,8 @@ class PolymodHandler
   {
     // Create the mod root if it doesn't exist.
     createModRoot();
-    trace('Initializing Polymod (using all mods)...');
-    loadModsById(getAllModIds());
+    //trace('Initializing Polymod (using all mods)...');
+    //loadModsById(getAllModIds());
   }
 
   /**
@@ -85,8 +85,8 @@ class PolymodHandler
     // Create the mod root if it doesn't exist.
     createModRoot();
 
-    trace('Initializing Polymod (using configured mods)...');
-    loadModsById(Save.instance.enabledModIds);
+    //trace('Initializing Polymod (using configured mods)...');
+    //loadModsById(Save.instance.enabledModIds);
   }
 
   /**
@@ -98,8 +98,8 @@ class PolymodHandler
     createModRoot();
 
     // We still need to configure the debug print calls etc.
-    trace('Initializing Polymod (using no mods)...');
-    loadModsById([]);
+    //trace('Initializing Polymod (using no mods)...');
+    //loadModsById([]);
   }
 
   /**
@@ -117,11 +117,13 @@ class PolymodHandler
       trace('Attempting to load ${ids.length} mods...');
     }
 
-    buildImports();
+    //buildImports();
 
     if (modFileSystem == null) modFileSystem = buildFileSystem();
 
-    var loadedModList:Array<ModMetadata> = polymod.Polymod.init(
+    var loadedModList:Array<ModMetadata> = null;
+
+/*    var loadedModList:Array<ModMetadata> = polymod.Polymod.init(
       {
         // Root directory for all mods.
         modRoot: MOD_FOLDER,
@@ -151,7 +153,7 @@ class PolymodHandler
         // Parse hxc files and register the scripted classes in them.
         useScriptedClasses: true,
         loadScriptsAsync: #if html5 true #else false #end,
-      });
+      }); */
 
     if (loadedModList == null)
     {
@@ -172,8 +174,8 @@ class PolymodHandler
     loadedModIds = [];
     for (mod in loadedModList)
     {
-      trace('  * ${mod.title} v${mod.modVersion} [${mod.id}]');
-      loadedModIds.push(mod.id);
+      //trace('  * ${mod.title} v${mod.modVersion} [${mod.id}]');
+      //loadedModIds.push(mod.id);
     }
 
     #if debug

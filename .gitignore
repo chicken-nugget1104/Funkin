@@ -14,3 +14,6 @@ shitAudio/
 node_modules/
 package.json
 package-lock.json
+/assets/shared/images/dialogue
+assets/shared/images/speech_bubble.png
+assets/shared/images/speech_bubble.xml

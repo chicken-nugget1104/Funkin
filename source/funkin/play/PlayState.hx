@@ -1076,6 +1076,15 @@ class PlayState extends MusicBeatSubState
     if (!isInCutscene) processNotes(elapsed);
 
     justUnpaused = false;
+
+    if(Highscore.tallies.combo == 50)
+    {
+      currentStage.getGirlfriend().playAnimation('combo50', true);
+    }
+    if(Highscore.tallies.missed == 70)
+    {
+      currentStage.getGirlfriend().playAnimation('drop70', true);
+    }
   }
 
   function moveToGameOver():Void
