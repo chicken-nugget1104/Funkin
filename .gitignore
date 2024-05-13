@@ -1,5 +1,8 @@
 .DS_STORE
 .haxelib/
+.vscode
+.github
+.git
 .vs/
 APIStuff.hx
 batfiles/
