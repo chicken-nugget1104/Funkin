@@ -8,10 +8,13 @@ APIStuff.hx
 batfiles/
 dump/
 export/
-RECOVER_*.fla
 shitAudio/
 .build_time
 .swp
+
+#Exclude every FLA i can find in assets (just so i can add a new FLA :3)
+assets/preload/images/prompt-ng_login.fla
+assets/preload/images/fonts/funny.fla
 
 # Exclude JS stuff
 node_modules/
