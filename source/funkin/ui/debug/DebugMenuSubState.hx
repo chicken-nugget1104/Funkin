@@ -55,10 +55,10 @@ class DebugMenuSubState extends MusicBeatSubState
     // Create each menu item.
     // Call onMenuChange when the first item is created to move the camera .
     onMenuChange(createItem("CHART EDITOR", openChartEditor));
-    // createItem("Input Offset Testing", openInputOffsetTesting);
+    createItem("Input Offset Testing", openInputOffsetTesting);
     createItem("ANIMATION EDITOR", openAnimationEditor);
-    // createItem("STAGE EDITOR", openStageEditor);
-    // createItem("TEST STICKERS", testStickers);
+    createItem("STAGE EDITOR", openStageEditor);
+    createItem("TEST STICKERS", testStickers);
     #if sys
     createItem("OPEN CRASH LOG FOLDER", openLogFolder);
     #end
@@ -117,7 +117,8 @@ class DebugMenuSubState extends MusicBeatSubState
 
   function openStageEditor()
   {
-    trace('Stage Editor');
+    FlxG.switchState(() -> new funkin.ui.debug.stage.StageBuilderState());
+    trace('Stage BUILDER');
   }
 
   #if sys
@@ -129,7 +130,7 @@ class DebugMenuSubState extends MusicBeatSubState
 
   function exitDebugMenu()
   {
-    // TODO: Add a transition?
+    openSubState(new funkin.ui.transition.StickerSubState());
     this.close();
   }
 }
