@@ -162,7 +162,17 @@ class LoadingState extends MusicBeatSubState
     {
       targetShit = FlxMath.remapToRange(callbacks.numRemaining / callbacks.length, 1, 0, 0, 1);
 
-      loadBar.scale.x = FlxMath.lerp(loadBar.scale.x, targetShit, 0.50);
+      var lerpFactor:Float = 0.50; // Adjust this value to control the speed of interpolation
+
+      // Calculate the new scale using lerp
+      var newScale:Float = FlxMath.lerp(loadBar.scale.x, targetShit, lerpFactor);
+
+      // Set the new scale
+      loadBar.scale.x = newScale;
+
+      // Update the graphic size and hitbox
+      loadBar.setGraphicSize(Std.int(FlxG.width * newScale), loadBar.height);
+      loadBar.updateHitbox();
       FlxG.watch.addQuick('percentage?', callbacks.numRemaining / callbacks.length);
     }
 
