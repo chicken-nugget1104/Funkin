@@ -80,8 +80,8 @@
       "name": "hxCodec",
       "type": "git",
       "dir": null,
-      "ref": "a8929be61c58a2eb4ebda4c58c06999b5b2ce9a3",
-      "url": "https://github.com/polybiusproxy/hxCodec/"
+      "ref": "61b98a7a353b7f529a8fec84ed9afc919a2dffdd",
+      "url": "https://github.com/FunkinCrew/hxCodec"
     },
     {
       "name": "hxcpp",
