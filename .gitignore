@@ -20,3 +20,4 @@ assets/preload/images/fonts/funny.fla
 node_modules/
 package.json
 package-lock.json
+/art/flashFiles/excludeme
