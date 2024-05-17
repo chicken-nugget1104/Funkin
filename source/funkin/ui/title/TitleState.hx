@@ -30,11 +30,11 @@ import openfl.events.NetStatusEvent;
 import funkin.ui.freeplay.FreeplayState;
 import openfl.media.Video;
 import openfl.net.NetStream;
+#if html5
 import funkin.api.newgrounds.NGio;
+#end
 import openfl.display.BlendMode;
 
-#if desktop
-#end
 class TitleState extends MusicBeatState
 {
   /**
@@ -51,6 +51,9 @@ class TitleState extends MusicBeatState
   var lastBeat:Int = 0;
   var usesLeft:Int = 5;
   var swagShader:ColorSwap;
+
+  // super hidden shader
+  var gfShader:Grayscale;
 
   var video:Video;
   var netStream:NetStream;
@@ -140,19 +143,7 @@ class TitleState extends MusicBeatState
     gfDance.frames = Paths.getSparrowAtlas('gfDanceTitle');
     gfDance.animation.addByIndices('danceLeft', 'gfDance', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
     gfDance.animation.addByIndices('danceRight', 'gfDance', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
-
-    // maskShader.swagSprX = gfDance.x;
-    // maskShader.swagMaskX = gfDance.x + 200;
-    // maskShader.frameUV = gfDance.frame.uv;
-    // gfDance.shader = maskShader;
-
     gfDance.shader = swagShader.shader;
-
-    // gfDance.shader = new TitleOutline();
-
-    add(logoBl);
-
-    add(gfDance);
 
     titleText = new FlxSprite(100, FlxG.height * 0.8);
     titleText.frames = Paths.getSparrowAtlas('titleEnter');
@@ -161,8 +152,10 @@ class TitleState extends MusicBeatState
     titleText.animation.play('idle');
     titleText.updateHitbox();
     titleText.shader = swagShader.shader;
-    // titleText.screenCenter(X);
     add(titleText);
+    add(logoBl);
+    add(gfDance);
+    //Does this break layering? I dunno i'm just trying to do stuff.
 
     if (!initialized) // Fix an issue where returning to the credits would play a black screen.
     {
@@ -272,8 +265,12 @@ class TitleState extends MusicBeatState
       FlxTween.tween(outlineShaderShit, {funnyX: 50, funnyY: 50}, 0.6, {ease: FlxEase.quartOut});
     }
 
+    if (FlxG.keys.justPressed.F)
+    {
+      gfDance.shader = gfShader;
+    }
+
     if (FlxG.keys.pressed.D) outlineShaderShit.funnyX += 1;
-    // outlineShaderShit.xPos.value[0] += 1;
 
     if (FlxG.keys.justPressed.Y || usesLeft != 0)
     {
